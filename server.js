@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
@@ -7,7 +9,7 @@ var express = require('express'),
   
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Vmdb'); 
+mongoose.connect(process.env.DB_SERVER || 'mongodb://localhost/Vmdb');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
