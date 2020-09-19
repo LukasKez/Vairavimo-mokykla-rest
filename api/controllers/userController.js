@@ -17,30 +17,49 @@ exports.create_user = function(req, res) {
   new_user.save(function(err, user) {
     if (err)
       res.send(err);
-    res.json(user);
+    // res.json(user);
+    res.status(201).send(user);
   });
 };
 
 exports.read_user = function(req, res) {
-  User.findById(req.params.userId, function(err, user) {
-    if (err)
-      res.send(err);
-    res.json(user);
+  User.findById(req.params.userId, function (err, user) {
+    if (!user) {
+      res.status(404).send({
+        userId: req.params.userId,
+        error: "not found"});
+    } else {
+        if (err)
+          res.send(err);
+        res.json(user);
+    }
   });
 };
 
 exports.update_user = function(req, res) {
   User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
-    if (err)
-      res.send(err);
-    res.json(user);
+    if (!user) {
+      res.status(404).send({
+        userId: req.params.userId,
+        error: "not found"});
+    } else {
+        if (err)
+          res.send(err);
+        res.json(user);
+    }
   });
 };
 
 exports.delete_user = function(req, res) {
   User.remove({_id: req.params.userId}, function(err, user) {
-    if (err)
-      res.send(err);
-    res.json({ message: 'User ' + req.params.userId + ' successfully deleted' });
+    if (!user) {
+      res.status(404).send({
+        userId: req.params.userId,
+        error: "not found"});
+    } else {
+        if (err)
+          res.send(err);
+        res.json({ message: 'User ' + req.params.userId + ' successfully deleted' });
+    }
   });
 };
