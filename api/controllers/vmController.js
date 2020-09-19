@@ -26,10 +26,16 @@ exports.create_a_task = function(req, res) {
 
 
 exports.read_a_task = function(req, res) {
-  Task.findById(req.params.taskId, function(err, task) {
-    if (err)
-      res.send(err);
-    res.json(task);
+  Task.findById(req.params.taskId, function (err, task) {
+    if (!task)
+      res.status(404).send({
+        taskId: req.params.taskId,
+        error: "not found"});
+    else {
+      if (err)
+        res.send(err);
+      res.json(task);
+    }
   });
 };
 

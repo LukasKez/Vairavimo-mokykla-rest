@@ -25,13 +25,13 @@ var userRoutes = require('./api/routes/userRoutes');
 var officeRoutes = require('./api/routes/officeRoutes');
 var lectureRoutes = require('./api/routes/lectureRoutes');
 
-//register the routes
+// register the routes
 vmRoutes(app);
 userRoutes(app);
 officeRoutes(app);
 lectureRoutes(app);
 
-//body parser interceptor for custom status pages
+// body parser interceptor for custom status pages
 app.use(function (req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' })
 });
