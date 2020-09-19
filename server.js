@@ -1,11 +1,12 @@
-// require('dotenv').config();
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
   Task = require('./api/models/vmModel'),
   User = require('./api/models/userModel'),
-  bodyParser = require('body-parser');
+  // <-- missing office and lecture data modules -->
+  bodyParser = require('body-parser'),
+  cors = require('cors');
 
 // connect to MongoDB using mongoose
 mongoose.Promise = global.Promise;
@@ -16,15 +17,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
+app.use(cors());
+
+
 var vmRoutes = require('./api/routes/vmRoutes');
 var userRoutes = require('./api/routes/userRoutes');
 var officeRoutes = require('./api/routes/officeRoutes');
+var lectureRoutes = require('./api/routes/lectureRoutes');
 
 //register the routes
 vmRoutes(app);
 userRoutes(app);
 officeRoutes(app);
-//<--missing lecture routes-->
+lectureRoutes(app);
 
 //body parser interceptor for custom status pages
 app.use(function (req, res) {
