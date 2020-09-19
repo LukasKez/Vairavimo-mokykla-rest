@@ -23,12 +23,13 @@ app.use(cors());
 var vmRoutes = require('./api/routes/vmRoutes');
 var userRoutes = require('./api/routes/userRoutes');
 var officeRoutes = require('./api/routes/officeRoutes');
+var lectureRoutes = require('./api/routes/lectureRoutes');
 
 //register the routes
 vmRoutes(app);
 userRoutes(app);
 officeRoutes(app);
-//<--missing lecture routes-->
+lectureRoutes(app);
 
 //body parser interceptor for custom status pages
 app.use(function (req, res) {
