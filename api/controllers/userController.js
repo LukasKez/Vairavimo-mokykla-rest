@@ -17,7 +17,6 @@ exports.create_user = function(req, res) {
   new_user.save(function(err, user) {
     if (err)
       res.send(err);
-    // res.json(user);
     res.status(201).send(user);
   });
 };

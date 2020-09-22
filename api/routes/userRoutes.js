@@ -11,4 +11,7 @@ module.exports = function(app) {
         .get(users.read_user)
         .put(users.update_user)
         .delete(users.delete_user);
+    
+    // TODO: implement hierarchy endpoints
+    
 };
