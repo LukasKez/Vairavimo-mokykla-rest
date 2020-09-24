@@ -14,7 +14,8 @@ var UserSchema = new Schema({
   Role: {
     type: Number,
     default: 0
-  }
+  },
+  Office: Number //make fields required
 });
 
 module.exports = mongoose.model('Users', UserSchema);

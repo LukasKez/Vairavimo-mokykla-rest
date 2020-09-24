@@ -12,14 +12,12 @@ module.exports = function(app) {
         .put(offices.update_office)
         .delete(offices.delete_office);
     
-    // TODO: implement hierarchy endpoints
-    app.route('/offices/:officeId/lectures/:lectureId')
-        .get(function (req, res) {
-            res.json({
-                message: 'Office\'s lecture information here',
-                officeID: req.params.officeId,
-                lectureID: req.params.lectureId
-            });
-        })
-
+    app.route('/offices/:officeId/users')
+        .get(offices.list_users);
+        // .post(offices.create_user);
+    
+    app.route('/offices/:officeId/users/:userId')
+        .get(offices.read_user);
+        // .put(offices.update_user)
+        // .delete(offices.delete_user);
 };

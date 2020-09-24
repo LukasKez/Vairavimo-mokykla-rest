@@ -12,9 +12,12 @@ module.exports = function(app) {
         .put(lectures.update_lecture)
         .delete(lectures.delete_lecture);
     
-    // TODO: implement hierarchy endpoints
+    app.route('/lectures/:lectureId/users')
+        .get(lectures.list_users);
+        // .post(lectures.create_user);
+    
     app.route('/lectures/:lectureId/users/:userId')
-        .get(function (req, res) {
-            res.json(req.params);
-        });
+        .get(lectures.read_user);
+        // .put(lectures.update_user)
+        // .delete(lectures.delete_user);
 };

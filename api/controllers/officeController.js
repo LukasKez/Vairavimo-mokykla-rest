@@ -1,66 +1,88 @@
 'use strict';
 
+var mongoose = require('mongoose'),
+  User = mongoose.model('Users');
+
 exports.list_offices = function (req, res) {
-    res.json({ message: 'List of offices' });
+    res.json({
+        "Offices": [
+            {
+                ID: 1,
+                City: "Kaunas",
+                Adress: "Kalnų g. 5",
+                Users: ['User1', 'User2', 'User3']
+            }, {
+                ID: 2,
+                City: "Vilnius",
+                Adress: "Vingio g. 69",
+                Users: ['User1', 'User2', 'User3']
+            }
+        ]
+    });
 };
 
 exports.create_office = function (req, res) {
-    res.json({ message: 'Created new office' });
+    res.json({
+        ID: 1,
+        City: "Kaunas",
+        Adress: "Kalnų g. 5",
+        Users: ['User1', 'User2', 'User3']
+    });
 };
 
 exports.read_office = function (req, res) {
-    res.json({ message: 'Office information here' });
+    res.json({
+        ID: 1,
+        City: "Kaunas",
+        Adress: "Kalnų g. 5",
+        Users: ['User1', 'User2', 'User3']
+    });
 };
 
 exports.update_office = function (req, res) {
-    res.json({ message: 'Updated office information' });
+    res.json({
+        ID: 1,
+        City: "Kaunas",
+        Adress: "Kalnų g. 5",
+        Users: ['User1', 'User2', 'User3']
+    });
 };
 
 exports.delete_office = function (req, res) {
-    res.json({ message: 'Deleted office' });
+    res.json({ message: 'Deleted office ID 1' });
 };
 
-// var mongoose = require('mongoose'),
-//   User = mongoose.model('Users');
+// Hierarchy
+exports.list_users = function (req, res) {
+    User.find({}, function (err, user) {
+        if (err)
+            res.send(err);
+        res.json(user);
+    })
+};
 
-
-// exports.list_users = function(req, res) {
-//     User.find({}, function(err, user) {
-//     if (err)
-//       res.send(err);
-//     res.json(user);
-//   });
+// exports.create_user = function (req, res) {
+  
 // };
 
-// exports.create_user = function(req, res) {
-//   var new_user = new User(req.body);
-//   new_user.save(function(err, user) {
-//     if (err)
-//       res.send(err);
-//     res.json(user);
-//   });
+exports.read_user = function (req, res) {
+    User.findById(req.params.userId, function (err, user) {
+        if (!user) {
+          res.status(404).send({
+            userId: req.params.userId,
+            error: "not found"});
+        } else {
+            if (err)
+              res.send(err);
+            res.json(user);
+        }
+    });
+};
+
+// exports.update_user = function (req, res) {
+  
 // };
 
-// exports.read_user = function(req, res) {
-//   User.findById(req.params.userId, function(err, user) {
-//     if (err)
-//       res.send(err);
-//     res.json(user);
-//   });
-// };
-
-// exports.update_user = function(req, res) {
-//   User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
-//     if (err)
-//       res.send(err);
-//     res.json(user);
-//   });
-// };
-
-// exports.delete_user = function(req, res) {
-//   User.remove({_id: req.params.userId}, function(err, user) {
-//     if (err)
-//       res.send(err);
-//     res.json({ message: 'User successfully deleted' });
-//   });
+// exports.delete_user = function (req, res) {
+  
 // };
