@@ -11,4 +11,10 @@ module.exports = function(app) {
         .get(users.read_user)
         .put(users.update_user)
         .delete(users.delete_user);
+    
+    app.route('/users/:userId/lectures')
+        .get(users.list_lectures);
+    
+    app.route('/users/:userId/lectures/:lectureId')
+        .get(users.read_lecture);
 };

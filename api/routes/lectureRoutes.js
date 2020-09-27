@@ -11,4 +11,10 @@ module.exports = function(app) {
         .get(lectures.read_lecture)
         .put(lectures.update_lecture)
         .delete(lectures.delete_lecture);
+    
+    app.route('/lectures/:lectureId/users')
+        .get(lectures.list_users);
+    
+    app.route('/lectures/:lectureId/users/:userId')
+        .get(lectures.read_user);
 };

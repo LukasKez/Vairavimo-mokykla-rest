@@ -16,8 +16,7 @@ exports.create_user = function(req, res) {
   var new_user = new User(req.body);
   new_user.save(function(err, user) {
     if (err)
-      res.send(err);
-    // res.json(user);
+      res.status(409).send(err);
     res.status(201).send(user);
   });
 };
@@ -62,4 +61,38 @@ exports.delete_user = function(req, res) {
         res.json({ message: 'User ' + req.params.userId + ' successfully deleted' });
     }
   });
+};
+
+
+exports.list_lectures = function (req, res) {
+  res.json({
+    "Lectures": [
+        {
+            ID: 1,
+            Type: "Teorinė paskaita",
+            Lecturer: "Aloyzas Instruktorius",
+            Date: "2020-10-15",
+            Time: "14:30",
+            Students: ['User1', 'User2', 'User3']
+        }, {
+            ID: 2,
+            Type: "Praktinė paskaita (vairavimas)",
+            Lecturer: "Aloyzas Instruktorius",
+            Date: "2020-10-15",
+            Time: "17:00",
+            Students: ['User1']
+        }
+    ]
+});
+};
+
+exports.read_lecture = function (req, res) {
+  res.json({
+    ID: 1,
+    Type: "Teorinė paskaita",
+    Lecturer: "Aloyzas Instruktorius",
+    Date: "2020-10-15",
+    Time: "14:30",
+    Students: ['User1', 'User2', 'User3']
+});
 };

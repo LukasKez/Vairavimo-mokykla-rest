@@ -2,7 +2,6 @@ var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
-  Task = require('./api/models/vmModel'),
   User = require('./api/models/userModel'),
   // <-- missing office and lecture data modules -->
   bodyParser = require('body-parser'),
@@ -20,13 +19,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-var vmRoutes = require('./api/routes/vmRoutes');
 var userRoutes = require('./api/routes/userRoutes');
 var officeRoutes = require('./api/routes/officeRoutes');
 var lectureRoutes = require('./api/routes/lectureRoutes');
 
 // register the routes
-vmRoutes(app);
 userRoutes(app);
 officeRoutes(app);
 lectureRoutes(app);

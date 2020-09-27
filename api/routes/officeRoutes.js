@@ -11,4 +11,10 @@ module.exports = function(app) {
         .get(offices.read_office)
         .put(offices.update_office)
         .delete(offices.delete_office);
+    
+    app.route('/offices/:officeId/users')
+        .get(offices.list_users);
+    
+    app.route('/offices/:officeId/users/:userId')
+        .get(offices.read_user);
 };
