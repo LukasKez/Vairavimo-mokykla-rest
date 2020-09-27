@@ -62,7 +62,7 @@ exports.delete_lecture = function (req, res) {
     res.json({ message: 'Deleted lecture ID 4' });
 };
 
-// Hierarchy
+
 exports.list_users = function (req, res) {
     User.find({}, function (err, user) {
         if (err)
@@ -70,10 +70,6 @@ exports.list_users = function (req, res) {
         res.json(user);
     })
 };
-
-// exports.create_user = function (req, res) {
-  
-// };
 
 exports.read_user = function (req, res) {
     User.findById(req.params.userId, function (err, user) {
@@ -88,11 +84,3 @@ exports.read_user = function (req, res) {
         }
     });
 };
-
-// exports.update_user = function (req, res) {
-  
-// };
-
-// exports.delete_user = function (req, res) {
-  
-// };

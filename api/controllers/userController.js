@@ -63,6 +63,7 @@ exports.delete_user = function(req, res) {
   });
 };
 
+
 exports.list_lectures = function (req, res) {
   res.json({
     "Lectures": [
@@ -85,10 +86,6 @@ exports.list_lectures = function (req, res) {
 });
 };
 
-// exports.create_lecture = function (req, res) {
-  
-// };
-
 exports.read_lecture = function (req, res) {
   res.json({
     ID: 1,
@@ -99,11 +96,3 @@ exports.read_lecture = function (req, res) {
     Students: ['User1', 'User2', 'User3']
 });
 };
-
-// exports.update_lecture = function (req, res) {
-  
-// };
-
-// exports.delete_lecture = function (req, res) {
-  
-// };

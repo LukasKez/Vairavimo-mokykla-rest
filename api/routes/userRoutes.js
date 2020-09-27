@@ -14,10 +14,7 @@ module.exports = function(app) {
     
     app.route('/users/:userId/lectures')
         .get(users.list_lectures);
-        // .post(users.create_lecture);
     
     app.route('/users/:userId/lectures/:lectureId')
         .get(users.read_lecture);
-        // .put(users.update_lecture)
-        // .delete(users.delete_lecture);
 };

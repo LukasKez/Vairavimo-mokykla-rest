@@ -14,10 +14,7 @@ module.exports = function(app) {
     
     app.route('/offices/:officeId/users')
         .get(offices.list_users);
-        // .post(offices.create_user);
     
     app.route('/offices/:officeId/users/:userId')
         .get(offices.read_user);
-        // .put(offices.update_user)
-        // .delete(offices.delete_user);
 };
