@@ -3,19 +3,31 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  Name: String,
-  Surname: String,
-  Username: String,
-  Password: String,
-  Created_date: {
+  name: {
+    type: String,
+    required: true
+  },
+  surname: {
+    type: String,
+    required: true
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  created_date: {
     type: Date,
     default: Date.now
   },
-  Role: {
+  role: {
     type: Number,
     default: 0
   },
-  Office: Number //make fields required
+  office: Number // office ID? 
 });
 
 module.exports = mongoose.model('Users', UserSchema);
