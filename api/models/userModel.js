@@ -15,7 +15,14 @@ var UserSchema = new Schema({
     type: Number,
     default: 0
   },
-  Office: Number //make fields required
+  Office: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Office"
+  },
+  Lectures: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Lecture"
+  }
 });
 
-module.exports = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

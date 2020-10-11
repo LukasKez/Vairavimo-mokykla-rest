@@ -3,7 +3,8 @@ var express = require('express'),
   port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
   User = require('./api/models/userModel'),
-  // <-- missing office and lecture data modules -->
+  Office = require('./api/models/officeModel'),
+  Lecture = require('./api/models/lectureModel'),
   bodyParser = require('body-parser'),
   cors = require('cors');
 

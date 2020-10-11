@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  User = mongoose.model('Users');
+  User = mongoose.model('User');
 
 exports.list_offices = function (req, res) {
     res.json({
