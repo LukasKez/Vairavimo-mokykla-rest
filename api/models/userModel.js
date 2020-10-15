@@ -13,7 +13,8 @@ var UserSchema = new Schema({
   },
   username: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   password: {
     type: String,
@@ -27,11 +28,12 @@ var UserSchema = new Schema({
     type: Number,
     default: 0
   },
-  Office: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Office"
+  office: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Office",
+    // required: true
   },
-  Lectures: {
+  lectures: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Lecture"
   }

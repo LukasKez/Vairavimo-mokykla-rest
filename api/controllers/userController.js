@@ -4,20 +4,27 @@ var mongoose = require('mongoose'),
   User = mongoose.model('User');
 
 const crypto = require('crypto');
-const e = require('express');
+// const e = require('express');
 
+// Get user list
+exports.list_users = (req, res) => {
+  User.find()
+    .populate('office')
+    .populate('lectures')
+    .then(users => {
+      res.json(users);
+    }).catch(err => {
+      res.status(404).send({
+        message: "not found"
+      })
+    })
+}
 
-exports.list_users = function (req, res) {
-  User.find({}, function (err, user) {
-    if (err)
-      res.send(err);
-    res.json(user);
-  });
-};
-
-exports.create_user = function (req, res) {
+// Create user
+exports.create_user = (req, res) => {
   if (!req.body.password)
-    res.status(409).send({error: "Please fill out the password field"});
+    res.status(409).send({ message: "Password is required" });
+  
   let salt = crypto.randomBytes(16).toString('base64');
   let hash = crypto.createHmac('sha512', salt)
     .update(req.body.password)
@@ -32,32 +39,38 @@ exports.create_user = function (req, res) {
   });
 };
 
-exports.read_user = function (req, res) {
-  User.findById(req.params.userId, function (err, user) {
-    if (!user) {
-      res.status(404).send({
-        userId: req.params.userId,
-        error: "not found"
-      });
-    } else {
-      if (err)
-        res.send(err);
+// Get user by ID
+exports.read_user = (req, res) => {
+  User.findById(req.params.userId)
+    .populate('office')
+    .populate('lectures')
+    .then(user => {
       res.json(user);
-    }
-  });
+    }).catch(err => {
+      if (err.kind === 'ObjectId') {
+        res.status(404).send({
+          userId: req.params.userId,
+          message: "not found"
+        })
+      } else {
+        res.send(err);
+      }
+    })
 };
 
 exports.update_user = function (req, res) { //patikrinti ar ne tuscia uzklausa gal dar
   if (req.body.password) {
     let salt = crypto.randomBytes(16).toString('base64');
-    let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
+    let hash = crypto.createHmac('sha512', salt)
+      .update(req.body.password)
+      .digest("base64");
     req.body.password = salt + "$" + hash;
   }
   User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true }, function (err, user) {
     if (!user) {
       res.status(404).send({
         userId: req.params.userId,
-        error: "not found"
+        message: "not found"
       });
     } else {
       if (err)
@@ -81,10 +94,6 @@ exports.delete_user = function (req, res) {
     }
   });
 };
-
-exports.login = function (req, res) {
-  
-}
 
 
 exports.list_lectures = function (req, res) {

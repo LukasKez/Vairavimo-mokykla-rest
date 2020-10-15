@@ -1,20 +1,54 @@
 'use strict';
 
 module.exports = function(app) {
-    var users = require('../controllers/userController');
+    const users = require('../controllers/userController');
+    const auth = require('../controllers/authController');
+    const config = require('../../env.config');
+
+    const STUDENT = config.permissionLevels.STUDENT;
+    const LECTURER = config.permissionLevels.LECTURER;
+    const ADMIN = config.permissionLevels.ADMIN;
 
     app.route('/users')
-        .get(users.list_users)
-        .post(users.create_user);
+        .get([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(STUDENT),
+            users.list_users
+        ])
+        .post([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(ADMIN),
+            users.create_user
+        ]);
 
     app.route('/users/:userId')
-        .get(users.read_user)
-        .put(users.update_user)
-        .delete(users.delete_user);
+        .get([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(STUDENT),
+            users.read_user
+        ])
+        .put([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(STUDENT),
+            users.update_user
+        ])
+        .delete([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(ADMIN),
+            users.delete_user
+        ]);
     
     app.route('/users/:userId/lectures')
-        .get(users.list_lectures);
+        .get([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(STUDENT),
+            users.list_lectures
+        ]);
     
     app.route('/users/:userId/lectures/:lectureId')
-        .get(users.read_lecture);
+        .get([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(STUDENT),
+            users.read_lecture
+        ]);
 };

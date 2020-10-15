@@ -23,11 +23,13 @@ app.use(cors());
 var userRoutes = require('./api/routes/userRoutes');
 var officeRoutes = require('./api/routes/officeRoutes');
 var lectureRoutes = require('./api/routes/lectureRoutes');
+var authRoutes = require('./api/routes/authRoutes');
 
 // register the routes
 userRoutes(app);
 officeRoutes(app);
 lectureRoutes(app);
+authRoutes(app);
 
 // body parser interceptor for custom status pages
 app.use(function (req, res) {

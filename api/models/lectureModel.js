@@ -3,16 +3,21 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var LectureSchema = new Schema({
-  Type: String,
-  Lecturer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+  type: {
+    type: String,
+    required: true
   },
-  Date: Date,
-  Students: [
+  lecturer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  date: Date,
+  students: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
+      required: true
     }
   ]
 });
