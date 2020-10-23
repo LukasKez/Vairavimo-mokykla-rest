@@ -11,44 +11,44 @@ module.exports = function(app) {
 
     app.route('/users')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(STUDENT),
+            // auth.validJWTNeeded,
+            // auth.minimumPermissionLevelRequired(STUDENT),
             users.list_users
         ])
         .post([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(ADMIN),
+            // auth.validJWTNeeded,
+            // auth.minimumPermissionLevelRequired(ADMIN),
             users.create_user
         ]);
 
     app.route('/users/:userId')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(STUDENT),
+            // auth.validJWTNeeded,
+            // auth.minimumPermissionLevelRequired(STUDENT),
             users.read_user
         ])
         .put([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(STUDENT),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequired(STUDENT),
             users.update_user
         ])
         .delete([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(ADMIN),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequired(ADMIN),
             users.delete_user
         ]);
     
     app.route('/users/:userId/lectures')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(STUDENT),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequired(STUDENT),
             users.list_lectures
         ]);
     
     app.route('/users/:userId/lectures/:lectureId')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(STUDENT),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequired(STUDENT),
             users.read_lecture
         ]);
 };

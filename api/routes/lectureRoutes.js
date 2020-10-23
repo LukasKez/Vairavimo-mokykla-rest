@@ -2,10 +2,20 @@
 
 module.exports = function(app) {
     var lectures = require('../controllers/lectureController');
+    const auth = require('../controllers/authController');
+    const config = require('../../env.config');
+
+    const STUDENT = config.permissionLevels.STUDENT;
+    const LECTURER = config.permissionLevels.LECTURER;
+    const ADMIN = config.permissionLevels.ADMIN;
 
     app.route('/lectures')
         .get(lectures.list_lectures)
-        .post(lectures.create_lecture);
+        .post([
+            auth.validJWTNeeded,
+            auth.minimumPermissionLevelRequired(LECTURER),
+            lectures.create_lecture
+        ]);
 
     app.route('/lectures/:lectureId')
         .get(lectures.read_lecture)

@@ -43,7 +43,7 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
                             userId: user._id,
                             username: user.username,
                             role: user.role,
-                            //name: user[0].firstName + ' ' + user[0].lastName,
+                            name: user.name + ' ' + user.surname,
                         };
                         return next();
                 } else {
@@ -99,10 +99,10 @@ exports.validJWTNeeded = (req, res, next) => {
 exports.minimumPermissionLevelRequired = (required_permission_level) => {
     return (req, res, next) => {
         let user_permission_level = parseInt(req.jwt.role);
-        if (user_permission_level & required_permission_level) {
+        if (user_permission_level > required_permission_level || (user_permission_level == required_permission_level)) {
             return next();
         } else {
             return res.status(403).send();
         }
     };
- };
+};
