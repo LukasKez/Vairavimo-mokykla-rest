@@ -1,11 +1,12 @@
 var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 3000,
-  mongoose = require('mongoose'),
-  User = require('./api/models/userModel'),
-  // <-- missing office and lecture data modules -->
-  bodyParser = require('body-parser'),
-  cors = require('cors');
+    app = express(),
+    port = process.env.PORT || 3000,
+    mongoose = require('mongoose'),
+    User = require('./api/models/userModel'),
+    Office = require('./api/models/officeModel'),
+    Lecture = require('./api/models/lectureModel'),
+    bodyParser = require('body-parser'),
+    cors = require('cors');
 
 // connect to MongoDB using mongoose
 mongoose.Promise = global.Promise;
@@ -22,15 +23,17 @@ app.use(cors());
 var userRoutes = require('./api/routes/userRoutes');
 var officeRoutes = require('./api/routes/officeRoutes');
 var lectureRoutes = require('./api/routes/lectureRoutes');
+var authRoutes = require('./api/routes/authRoutes');
 
 // register the routes
 userRoutes(app);
 officeRoutes(app);
 lectureRoutes(app);
+authRoutes(app);
 
 // body parser interceptor for custom status pages
 app.use(function (req, res) {
-  res.status(404).send({ url: req.originalUrl + ' not found' })
+    res.status(404).send({ url: req.originalUrl + ' not found' })
 });
 
 
