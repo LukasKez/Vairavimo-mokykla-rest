@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 exports.list_offices = (req, res) => {
     Office.find()
-        .populate('users')
+        .populate('users', ['name', 'surname', 'username', 'role'])
         .exec((err, offices) => {
             if (err)
                 res.send(err);
@@ -25,7 +25,7 @@ exports.create_office = (req, res) => {
 
 exports.read_office = (req, res) => {
     Office.findById(req.params.officeId)
-        .populate('users')
+        .populate('users', ['name', 'surname', 'username', 'role'])
         .exec((err, office) => {
             if (err) {
                 res.status(404).send({

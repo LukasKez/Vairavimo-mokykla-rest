@@ -10,8 +10,8 @@ const crypto = require('crypto');
 // Get user list
 exports.list_users = (req, res) => {
     User.find()
-        .populate('office')
-        .populate('lectures')
+        .populate('office', ['city', 'address'])
+        .populate('lectures', ['type', 'date', 'lecturer'])
         .exec((err, users) => {
             if (err)
                 res.send(err);
@@ -54,8 +54,8 @@ exports.create_user = (req, res) => {
 // Get user by ID
 exports.read_user = (req, res) => {
     User.findById(req.params.userId)
-        .populate('office')
-        .populate('lectures')
+        .populate('office', ['city', 'address'])
+        .populate('lectures', ['type', 'date', 'lecturer'])
         .exec((err, user) => {
             if (err) {
                 res.status(404).send({
