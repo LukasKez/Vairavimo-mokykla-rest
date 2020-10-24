@@ -26,7 +26,7 @@ var UserSchema = new Schema({
     },
     role: {
         type: Number,
-        default: 0
+        default: 1
     },
     office: {
         type: mongoose.Schema.Types.ObjectId,
