@@ -18,7 +18,7 @@ exports.create_office = (req, res) => {
     let new_office = new Office(req.body);
     new_office.save((err, office) => {
         if (err)
-            res.status(409).send(err);
+            res.status(400).send(err);
         res.status(201).send(office);
     });
 };

@@ -36,13 +36,13 @@ exports.create_user = (req, res) => {
             if (err.name === "MongoError" && err.code === 11000)
                 // Duplicate username
                 return res.status(409).send({ message: 'Username already exists!' });
-            res.status(409).send(err);
+            res.status(400).send(err);
         }
         //attach office to user model
         let officeId = req.body.office;
         Office.findById(officeId, (err, office) => {
             if (err) {
-                res.status(409).send(err);
+                res.status(400).send(err);
             }
             office.users.push(new_user);
             office.save();

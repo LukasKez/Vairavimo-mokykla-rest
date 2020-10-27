@@ -24,7 +24,7 @@ exports.create_lecture = (req, res) => {
     let new_lecture = new Lecture(req.body);
     new_lecture.save((err, lecture) => {
         if (err)
-            res.status(409).send(err);
+            res.status(400).send(err);
 
         let students = req.body.students;
         students.forEach(userId => {
