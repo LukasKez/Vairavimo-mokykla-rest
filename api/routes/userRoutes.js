@@ -11,44 +11,44 @@ module.exports = function(app) {
 
     app.route('/users')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(LECTURER),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequired(LECTURER),
             users.list_users
         ])
         .post([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(ADMIN),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequired(ADMIN),
             users.create_user
         ]);
 
     app.route('/users/:userId')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
             users.read_user
         ])
         .put([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
             users.update_user
         ])
         .delete([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequired(ADMIN),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequired(ADMIN),
             users.delete_user
         ]);
     
     app.route('/users/:userId/lectures')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
             users.list_lectures
         ]);
     
     app.route('/users/:userId/lectures/:lectureId')
         .get([
-            auth.validJWTNeeded,
-            auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
+            //auth.validJWTNeeded,
+            //auth.minimumPermissionLevelRequiredMatchUserId(STUDENT),
             users.read_lecture
         ]);
 };
