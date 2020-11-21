@@ -7,7 +7,7 @@ module.exports = {
     "environment": "dev",
     "permissionLevels": {
         "STUDENT": 1,
-        "LECTURER": 4,
-        "ADMIN": 8
+        "LECTURER": 1,
+        "ADMIN": 1
     }
 };
