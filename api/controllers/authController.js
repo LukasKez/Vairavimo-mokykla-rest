@@ -83,7 +83,7 @@ exports.validJWTNeeded = (req, res, next) => {
         try {
             let authorization = req.headers['authorization'].split(' ');
             if (authorization[0] !== 'Bearer') {
-                return res.status(401).send();
+                return res.status(401).send('Bad token structure');
             } else {
                 req.jwt = jwt.verify(authorization[1], jwtSecret);
                 return next();
@@ -92,7 +92,7 @@ exports.validJWTNeeded = (req, res, next) => {
             return res.status(403).send();
         }
     } else {
-        return res.status(401).send();
+        return res.status(401).send('Wrong headers');
     }
 }; 
 
